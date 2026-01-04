@@ -1078,9 +1078,9 @@ namespace PSMF
               auto ind_p1   = dm.get_h_to_l_dg_normal();
               auto ind_p1_b = dm.get_l_to_h_dg_normal();
               auto ind_p2_b = dm.get_l_to_h_dg_tangent();
-              auto ind_p3_b = dm.get_l_to_h_dg_z();
+              auto ind_p3_b = dm.get_l_to_h_dg_z();       // indices change 
 
-              FullMatrix<double> AA(PatchMatrix.m(), PatchMatrix.n());
+              FullMatrix<double> AA(PatchMatrix.m(), PatchMatrix.n());   // AA, Bt are submatrices of PatchMatrix
 
               for (auto i = 0U; i < ind_v_b.size(); ++i)
                 for (auto j = 0U; j < ind_v_b.size(); ++j)
@@ -1142,8 +1142,8 @@ namespace PSMF
               //     out.close();
               //   }
 
-              LAPACKFullMatrix<double> exact_inverse(AA_inv.m(), AA_inv.n());
-              exact_inverse = AA_inv;
+              LAPACKFullMatrix<double> exact_inverse(AA_inv.m(), AA_inv.n()); // AA_inv 是花体A的interior dofs的逆
+              exact_inverse = AA_inv;   // 如果只训练单层矩阵；只改这个地方就可以
               // Timer time;
               exact_inverse.compute_inverse_svd_with_kernel(1);
               // std::cout << k + j * 3 + z * 9 << " " << time.wall_time() <<

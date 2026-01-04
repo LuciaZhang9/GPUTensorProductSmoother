@@ -89,7 +89,7 @@ namespace PSMF
         for (unsigned int d = 0; d < dim; ++d)
           patch_type += gpu_data.patch_type[patch * dim + d] * Util::pow(3, d);
 
-        for (unsigned int row = 0; row < n_patch_dofs; ++row)
+        for (unsigned int row = 0; row < n_patch_dofs; ++row) // 与此前相同；前后两个循环读/写数据，中间这里调用NN kernel
           {
             for (unsigned int i = 0; i < n_patch_dofs / blockDim.x + 1; ++i)
               if (tid + i * blockDim.x < n_patch_dofs)
